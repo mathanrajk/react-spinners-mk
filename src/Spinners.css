@@ -1,0 +1,82 @@
+/* Circular Spinner */
+.circular-spinner {
+  animation: spin-rotate 2s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes spin-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Cupertino Spinner */
+.cupertino-spinner {
+  /* Uses steps to create the classic iOS ticking animation */
+  animation: cupertino-spin 1s steps(12, end) infinite;
+  transform-origin: center;
+}
+
+@keyframes cupertino-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Single Circle Spinner */
+.single-circle-spinner {
+  animation: pulse-scale 1s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+@keyframes pulse-scale {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Double Circle Spinner */
+.double-circle-spinner {
+  animation: spin-rotate 2s linear infinite;
+  transform-origin: center;
+}
+
+/* Make the inner circle spin backwards */
+.double-circle-spinner .inner-circle {
+  transform-origin: 50px 50px;
+  animation: spin-rotate-reverse 1.5s linear infinite;
+}
+
+@keyframes spin-rotate-reverse {
+  0% {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+/* Spinner Overlay */
+.spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
