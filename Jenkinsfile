@@ -14,24 +14,24 @@ pipeline {
         
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                bat  'npm install'
             }
         }
         
         stage('Lint') {
             steps {
-                sh 'npm run lint'
+                bat  'npm run lint'
             }
         }
         
         stage('Build') {
             steps {
-                sh 'npm run build'
+                bat  'npm run build'
             }
         }
          stage('Test') {
             steps {
-                sh 'npm run test'
+                bat  'npm run test'
             }
         }
     }
