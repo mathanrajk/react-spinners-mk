@@ -1,73 +1,79 @@
-# React + TypeScript + Vite
+# react-spinners-mk
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A collection of simple, customizable, and lightweight loading spinners for React applications.
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+You can install the package using npm or yarn:
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install react-spinners-mk
+# or
+yarn add react-spinners-mk
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Usage
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Here is a basic example of how to use the default `Spinners` component:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```tsx
+import React from 'react';
+import Spinners, { SpinnerType } from 'react-spinners-mk';
+
+const App = () => {
+  return (
+    <div>
+      <h2>Loading Data...</h2>
+      <Spinners type={SpinnerType.Circular} color="#007bff" size={50} label="Loading..." />
+    </div>
+  );
+};
+
+export default App;
 ```
+
+### Advanced Usage
+
+You can highly customize the spinner, including turning it into a full overlay or changing its animation speed:
+
+```tsx
+import React, { useState } from 'react';
+import Spinners, { SpinnerType } from 'react-spinners-mk';
+
+const OverlayExample = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  return (
+    <Spinners 
+      type={SpinnerType.DoubleCircle} 
+      size={80} 
+      color="#1976d2" 
+      thickness={6}
+      animationDuration="1.5s"
+      label="Fetching your data..."
+      labelPosition="right"
+      labelColor="#333"
+      overlay={true}
+      visible={isLoading}
+    />
+  );
+};
+```
+
+## Props Configuration
+
+The `Spinners` component accepts the following props to easily customize its appearance and behavior:
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| **`type`** | `SpinnerType` enum | `SpinnerType.Circular` | The visual style of the spinner. Accepts `SpinnerType.Circular`, `SpinnerType.Cupertino`, `SpinnerType.SingleCircle`, or `SpinnerType.DoubleCircle`. |
+| **`color`** | `string` | `"#763ce0"` | The primary color of the spinner's strokes or fills. Accepts any valid CSS color string (e.g., `"#ff0000"`, `"blue"`, `"rgba(0,0,0,0.5)"`). |
+| **`size`** | `number \| string` | `40` | The width and height of the spinner in pixels (if provided as a number) or any valid CSS unit (if provided as a string). |
+| **`label`** | `string` | `""` | Optional text to display alongside the spinner. Useful for providing context like "Loading data...". |
+| **`labelPosition`** | `"top" \| "bottom" \| "left" \| "right"` | `"bottom"` | Where the label should be positioned relative to the spinner icon. |
+| **`labelColor`** | `string` | `"#000000"` | The text color of the label. |
+| **`visible`** | `boolean` | `true` | Controls whether the spinner is rendered in the DOM. Useful for conditionally showing the spinner without needing to wrap it in a ternary operator. |
+| **`animationDuration`** | `string` | `undefined` | Custom CSS animation duration (e.g., `"0.5s"`, `"2000ms"`). Allows you to speed up or slow down the default spinning animation. |
+| **`thickness`** | `number \| string` | `4` | Controls the thickness of the SVG strokes. Applies primarily to the `Circular` and `DoubleCircle` spinner types. |
+| **`overlay`** | `boolean` | `false` | When set to `true`, wraps the spinner in a `spinner-overlay` container class, which is typically used to create a full-screen or container-covering loading overlay. |
+| **`template`** | `string` | `undefined` | Allows you to pass a custom CSS class name directly to the inner wrapper container of the spinner and label for further styling. |
