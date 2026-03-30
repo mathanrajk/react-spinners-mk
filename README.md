@@ -14,17 +14,19 @@ yarn add react-spinners-mk
 
 ## Usage
 
-Here is a basic example of how to use the default `Spinners` component:
+### Basic Example
+
+Here is a basic example of how to use the `Spinners` component. By default, it renders a circular spinner.
 
 ```tsx
 import React from 'react';
-import Spinners, { SpinnerType } from 'react-spinners-mk';
+import Spinners from 'react-spinners-mk';
 
 const App = () => {
   return (
     <div>
-      <h2>Loading Data...</h2>
-      <Spinners type={SpinnerType.Circular} color="#007bff" size={50} label="Loading..." />
+      <h2>Loading...</h2>
+      <Spinners />
     </div>
   );
 };
