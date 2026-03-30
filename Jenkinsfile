@@ -5,13 +5,6 @@ pipeline {
         // Prevents warnings from being treated as errors during the build
         CI = 'true'
     }
-
-    tools {
-        // Ensure you have a NodeJS tool configured in Jenkins (Manage Jenkins -> Global Tool Configuration)
-        // named 'NodeJS'
-        nodejs 'NodeJS' 
-    }
-
     stages {
         stage('Checkout') {
             steps {
