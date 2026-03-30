@@ -74,25 +74,3 @@ pipeline {
         }
     }
 }
-```
-
----
-
-## Root Cause Summary
-
-| Problem | Cause | Fix |
-|---|---|---|
-| `Cannot find module 'ajv/dist/core'` | `ajv-draft-04` needs ajv v8, but v6 was installed | Add `"overrides": { "ajv": "^8.0.0" }` |
-| Stale broken install on Jenkins | Old `node_modules` cached from previous run | Add `Clean` stage to wipe before install |
-| `--legacy-peer-deps` not enough | It skips peer conflicts but doesn't fix version mismatches | `overrides` forces the correct version tree-wide |
-
----
-
-## Order of Actions
-```
-1. Fix package.json locally (add overrides)
-2. Delete node_modules + package-lock.json locally
-3. Run npm install --legacy-peer-deps locally
-4. Run npm run build locally ✅
-5. Commit & push package.json + package-lock.json
-6. Re-run Jenkins pipeline ✅
